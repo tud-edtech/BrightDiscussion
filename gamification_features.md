@@ -54,8 +54,14 @@ The badge is distributed to content creators deemed credible by other learners.
 #### Type IV: Supervised badges  
 Supervised badges are only distributed by supervision (e.g. lecturer, teaching assistant and more) to learners who contributed the discussion in a valuable manner. It helps to identify advanced learners and help validate the credibility of valuable threads, documents, links and explanations.
 
-### Considerations
+## Considerations
 Some way of moderating is important to prevent spam or students trying to game the system to get badges.
 - Word limit (minimum)
 - User credit scores (e.g. based on badges, ratings)
 - Pre-approved website domains for link/document screening
+
+## Reference
+- Gao, H., Chen, Y., Lee, K., Palsetia, D., & Choudhary, A. N. (2012, February). Towards Online Spam Filtering in Social Networks. In NDSS (Vol. 12, No. 2012, pp. 1-16)
+- Abramovich, S., Schunn, C., & Higashi, R. M. (2013). Are badges useful in education?: It depends upon the type of badge and expertise of learner. Educational Technology Research and Development, 61(2), 217-232
+- Rughiniș, R. (2013). Badge architectures in engineering education
+
