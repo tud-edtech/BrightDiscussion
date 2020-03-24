@@ -53,5 +53,7 @@ The badge is distributed to content creators deemed credible by other learners.
 Supervised badges are only distributed by supervision (e.g. lecturer, teaching assistant and more) to learners who contributed the discussion in a valuable manner. It helps to identify advanced learners and help validate the credibility of valuable threads, documents, links and explanations.
 
 ### Considerations
-
 Some way of moderating is important to prevent spam or students trying to game the system to get badges.
+- Word limit (minimum)
+- User credit scores (e.g. based on badges, ratings)
+- Pre-approved website domains for link/document screening
