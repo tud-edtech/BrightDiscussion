@@ -8,6 +8,8 @@ Students can earn badges by completing tasks within the system. There are badges
 - Badges are visual representation of attainable goals and sub-goals
 - Badges creates variable rewards for different aspects, hierarchies and purposes
 
+## Badge types
+
 ### General badges
 
 #### Type I: Tutorial (Beginner) badges  
