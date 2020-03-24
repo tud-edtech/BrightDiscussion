@@ -32,6 +32,8 @@ Achievement badges are rewarded when learners accumulately accomplish tasks in t
 
 ### Course level badges
 
+Course level badges can be achieved for each course. These badges focus on participation over actually being able to use the system.
+
 Type III: Community badges  
 The badge is distributed to content creators deemed credible by other learners.
 
