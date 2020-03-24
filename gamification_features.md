@@ -17,6 +17,7 @@ Tutorial badges are rewarded when users actively explore functions of the system
 - Create the first reply/comment
 - Shared the first external link
 - Shared the first document
+
 - Mentioned someone for the first time
 - Rate the first discussion thread
 - Rate the first reply/comment
@@ -29,10 +30,10 @@ Achievement badges are rewarded when learners accumulately accomplish tasks in t
 - Shared 20 external links
 - Shared 10 Documents
 
-Type III: Supervised badges
-Supervised badges are only distributed by supervision (e.g. lecturer, teaching assistant and more) to learners who contributed the discussion in a valuable manner. It helps to identify advanced learners and help validate the credibility of valuable threads, documents, links and explanations.
-
 ### Course level badges
+
+Type III: Community badges
+The badge is distributed to content creators deemed credible by other learners.
 
 - Create a discussion which is marked as helpful by 1 person
 - Create a discussion which is marked as helpful by 5 people
@@ -41,6 +42,13 @@ Supervised badges are only distributed by supervision (e.g. lecturer, teaching a
 - Create a reply which is marked as helpful by 1 person
 - Create a reply which is marked as helpful by 5 people
 - Create a reply which is marked as helpful by 10 people
+
+- Shared a link/document which is marked as helpful by 1 person
+- Shared a link/document which is marked as helpful by 5 people
+- Shared a link/document which is marked as helpful by 10 people
+
+Type IV: Supervised badges
+Supervised badges are only distributed by supervision (e.g. lecturer, teaching assistant and more) to learners who contributed the discussion in a valuable manner. It helps to identify advanced learners and help validate the credibility of valuable threads, documents, links and explanations.
 
 ### Considerations
 
