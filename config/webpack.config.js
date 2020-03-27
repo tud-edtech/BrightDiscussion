@@ -30,10 +30,10 @@ const postcssNormalize = require('postcss-normalize');
 const appPackageJson = require(paths.appPackageJson);
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const shouldUseSourceMap = false;
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
 // makes for a smoother build process.
-const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
+const shouldInlineRuntimeChunk = false;
 
 const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true';
 
@@ -135,7 +135,7 @@ module.exports = function(webpackEnv) {
     devtool: isEnvProduction
       ? shouldUseSourceMap
         ? 'source-map'
-        : false
+        : 'cheap-module-source-map'
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
@@ -515,6 +515,24 @@ module.exports = function(webpackEnv) {
           {
             inject: true,
             template: paths.appHtml,
+            cspPlugin: {
+              enabled: true,
+              policy: {
+                "base-uri": "'self'",
+                "object-src": "'none'",
+                "script-src": [ "https://127.0.0.1:8080", "'self'" ],
+                "style-src": [ "https://127.0.0.1:8080", "'self'"],
+                "font-src": [ "'unsafe-inline'", "'unsafe-eval'", "https://127.0.0.1:8080", "'self'" ],
+              },
+              hashEnabled: {
+                "script-src": true,
+                "style-src": true,
+              },
+              nonceEnabled: {
+                "script-src": true,
+                "style-src": true,
+              },
+            },
           },
           isEnvProduction
             ? {
@@ -555,6 +573,8 @@ module.exports = function(webpackEnv) {
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.
       new webpack.DefinePlugin(env.stringified),
+      // Placeholder for global used in any node_modules })
+      new webpack.DefinePlugin({ global: 'window' }),
       // This is necessary to emit hot updates (currently CSS only):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // Watcher doesn't work well if you mistype casing in a path so we use
@@ -606,22 +626,22 @@ module.exports = function(webpackEnv) {
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
-      isEnvProduction &&
-        new WorkboxWebpackPlugin.GenerateSW({
-          clientsClaim: true,
-          exclude: [/\.map$/, /asset-manifest\.json$/],
-          importWorkboxFrom: 'cdn',
-          navigateFallback: paths.publicUrlOrPath + 'index.html',
-          navigateFallbackBlacklist: [
-            // Exclude URLs starting with /_, as they're likely an API call
-            new RegExp('^/_'),
-            // Exclude any URLs whose last part seems to be a file extension
-            // as they're likely a resource and not a SPA route.
-            // URLs containing a "?" character won't be blacklisted as they're likely
-            // a route with query params (e.g. auth callbacks).
-            new RegExp('/[^/?]+\\.[^/]+$'),
-          ],
-        }),
+      // isEnvProduction &&
+      //   new WorkboxWebpackPlugin.GenerateSW({
+      //     clientsClaim: true,
+      //     exclude: [/\.map$/, /asset-manifest\.json$/],
+      //     importWorkboxFrom: 'cdn',
+      //     navigateFallback: paths.publicUrlOrPath + 'index.html',
+      //     navigateFallbackBlacklist: [
+      //       // Exclude URLs starting with /_, as they're likely an API call
+      //       new RegExp('^/_'),
+      //       // Exclude any URLs whose last part seems to be a file extension
+      //       // as they're likely a resource and not a SPA route.
+      //       // URLs containing a "?" character won't be blacklisted as they're likely
+      //       // a route with query params (e.g. auth callbacks).
+      //       new RegExp('/[^/?]+\\.[^/]+$'),
+      //     ],
+      //   }),
       // TypeScript type checking
       useTypeScript &&
         new ForkTsCheckerWebpackPlugin({
@@ -661,6 +681,7 @@ module.exports = function(webpackEnv) {
       net: 'empty',
       tls: 'empty',
       child_process: 'empty',
+      global: false,
     },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

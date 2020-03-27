@@ -18,11 +18,13 @@ import Sidebar from "./Sidebar";
 
 import "./style/App.css";
 import {BdComment, BdThread} from "./model";
+import MyPdfLoader from "./MyPdfLoader";
 
 interface Props {
 }
 
 interface State {
+    buffer: ArrayBuffer | null
     highlights: Array<BdThread>
 }
 
@@ -47,9 +49,12 @@ const DEFAULT_URL = "https://arxiv.org/pdf/1708.08021.pdf";
 const searchParams = new URLSearchParams(document.location.search);
 const url = searchParams.get("url") || DEFAULT_URL;
 
+const useBuffer = !!searchParams.get('buffer');
+
 class App extends Component<Props, State> {
-    state = {
-        highlights: testHighlights[url] ? [...testHighlights[url]] : []
+    state:State = {
+        highlights: useBuffer ? [] : testHighlights[url] ? [...testHighlights[url]] : [],
+        buffer: null
     };
 
     resetHighlights = () => {
@@ -75,7 +80,17 @@ class App extends Component<Props, State> {
             this.scrollToHighlightFromHash,
             false
         );
+
+        window.addEventListener(
+            "message",
+            this.receivePdf
+        )
     }
+
+    receivePdf = (ev: MessageEvent) => {
+        console.log("received message", ev.data, useBuffer);
+        this.setState({buffer: ev.data});
+    };
 
     getHighlightById(id: any) {
         const {highlights} = this.state;
@@ -125,7 +140,7 @@ class App extends Component<Props, State> {
     }
 
     render() {
-        const {highlights} = this.state;
+        const {highlights, buffer} = this.state;
 
         return (
             <div className="App" style={{display: "flex", height: "100vh"}}>
@@ -137,7 +152,7 @@ class App extends Component<Props, State> {
                         position: "relative"
                     }}
                 >
-                    <PdfLoader url={url} beforeLoad={<Spinner/>}>
+                    <MyPdfLoader url={url} useBuffer={useBuffer} buffer={buffer} beforeLoad={<Spinner/>}>
                         {(pdfDocument: any) => (
                             <PdfHighlighter
                                 pdfDocument={pdfDocument}
@@ -217,7 +232,7 @@ class App extends Component<Props, State> {
                                 highlights={highlights}
                             />
                         )}
-                    </PdfLoader>
+                    </MyPdfLoader>
                 </div>
                 <Sidebar
                     highlights={highlights}
