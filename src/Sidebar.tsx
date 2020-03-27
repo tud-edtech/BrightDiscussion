@@ -1,22 +1,21 @@
 import React from "react";
 import {T_Highlight} from "react-pdf-highlighter";
+import {BdComment, BdThread} from "./model";
+import Thread from "./Thread";
 
-type T_ManuscriptHighlight = T_Highlight;
+type T_ManuscriptHighlight = BdThread & T_Highlight;
 
 interface Props {
     highlights: Array<T_ManuscriptHighlight>,
     resetHighlights: () => void
+    addComment: (thread: BdThread) => (comment: BdComment) => void;
 }
 
-const updateHash = (highlight: T_ManuscriptHighlight) => {
-    document.location.hash = `highlight-${highlight.id}`;
-};
-
-function Sidebar({ highlights, resetHighlights }: Props) {
+function Sidebar({highlights, resetHighlights, addComment}: Props) {
     return (
-        <div className="sidebar" style={{ width: "25vw" }}>
-            <div className="description" style={{ padding: "1rem" }}>
-                <h2 style={{ marginBottom: "1rem" }}>BrightDiscussion</h2>
+        <div className="sidebar" style={{width: "25vw"}}>
+            <div className="description" style={{padding: "1rem"}}>
+                <h2 style={{marginBottom: "1rem"}}>BrightDiscussion</h2>
 
                 <p>
                     <small>
@@ -28,37 +27,11 @@ function Sidebar({ highlights, resetHighlights }: Props) {
 
             <ul className="sidebar__highlights">
                 {highlights.map((highlight, index) => (
-                    <li
-                        key={index}
-                        className="sidebar__highlight"
-                        onClick={() => {
-                            updateHash(highlight);
-                        }}
-                    >
-                        <div>
-                            <strong>{highlight.comment.text}</strong>
-                            {highlight.content.text ? (
-                                <blockquote style={{ marginTop: "0.5rem" }}>
-                                    {`${highlight.content.text.slice(0, 90).trim()}…`}
-                                </blockquote>
-                            ) : null}
-                            {highlight.content.image ? (
-                                <div
-                                    className="highlight__image"
-                                    style={{ marginTop: "0.5rem" }}
-                                >
-                                    <img src={highlight.content.image} alt={"Screenshot"} />
-                                </div>
-                            ) : null}
-                        </div>
-                        <div className="highlight__location">
-                            Page {highlight.position.pageNumber}
-                        </div>
-                    </li>
+                    <Thread key={index} thread={highlight} addComment={addComment(highlight)}/>
                 ))}
             </ul>
             {highlights.length > 0 ? (
-                <div style={{ padding: "1rem" }}>
+                <div style={{padding: "1rem"}}>
                     <button onClick={resetHighlights}>Reset highlights</button>
                 </div>
             ) : null}

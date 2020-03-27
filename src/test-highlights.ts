@@ -1,6 +1,7 @@
 import {T_Highlight} from "react-pdf-highlighter";
+import {BdThread} from "./model";
 
-const testHighlights: {[key: string]: T_Highlight[]} = {
+const testHighlights: {[key: string]: BdThread[]} = {
     "https://arxiv.org/pdf/1708.08021.pdf": [
         {
             content: {
@@ -31,6 +32,13 @@ const testHighlights: {[key: string]: T_Highlight[]} = {
                 text: "Flow or TypeScript?",
                 emoji: "🔥"
             },
+            comments: [
+                {
+                    text: "Very cool this",
+                    author: { name: "Person"}
+                }
+            ],
+            likes: 0,
             id: "8245652131754351"
         },
         {
@@ -62,6 +70,8 @@ const testHighlights: {[key: string]: T_Highlight[]} = {
                 text: "impressive",
                 emoji: ""
             },
+            comments: [],
+            likes: 0,
             id: "812807243318874"
         },
         {
@@ -102,6 +112,8 @@ const testHighlights: {[key: string]: T_Highlight[]} = {
                 text: "immersive coding experience!",
                 emoji: ""
             },
+            comments: [],
+            likes: 0,
             id: "2599712881412761"
         },
         {
@@ -125,6 +137,8 @@ const testHighlights: {[key: string]: T_Highlight[]} = {
                 text: "lisp!",
                 emoji: "😱"
             },
+            comments: [],
+            likes: 0,
             id: "9120567402727258"
         },
         {
@@ -165,6 +179,8 @@ const testHighlights: {[key: string]: T_Highlight[]} = {
                 text: "",
                 emoji: ""
             },
+            comments: [],
+            likes: 0,
             id: "32839601376722394"
         },
         {
@@ -188,6 +204,8 @@ const testHighlights: {[key: string]: T_Highlight[]} = {
                 text: "",
                 emoji: ""
             },
+            comments: [],
+            likes: 0,
             id: "46570518065661615"
         }
     ]

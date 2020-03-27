@@ -24,27 +24,35 @@ body {
     padding: 0;
 }
 
-.highlight__location {
+.thread__location {
     margin-top: 0.5rem;
     text-align: right;
     font-size: 10px;
 }
 
-.highlight__image {
+.thread__image {
     overflow: auto;
     max-width: 300px;
     border: 1px dashed;
 }
 
-.sidebar__highlight {
+.sidebar__thread {
     padding: 1rem;
     cursor: pointer;
     transition: background 140ms ease-in;
     border-bottom: 1px solid rgb(119, 119, 119);
 }
 
-.sidebar__highlight:hover {
+.sidebar__thread:hover {
     background: rgba(58, 56, 52, 0.08);
+}
+
+.thread__comment {
+    margin-left: 1em;
+}
+
+.thread__form {
+    margin-left: 1em;
 }
 
 a {

@@ -16,19 +16,14 @@ import testHighlights from "./test-highlights";
 import Spinner from "./Spinner";
 import Sidebar from "./Sidebar";
 
-// import type {
-//     T_Highlight,
-//     T_NewHighlight
-// } from "react-pdf-highlighter/src/types";
-
 import "./style/App.css";
+import {BdComment, BdThread} from "./model";
 
-type T_ManuscriptHighlight = T_Highlight;
-
-interface Props {}
+interface Props {
+}
 
 interface State {
-    highlights: Array<T_ManuscriptHighlight>
+    highlights: Array<BdThread>
 }
 
 const getNextId = () => String(Math.random()).slice(2);
@@ -88,7 +83,7 @@ class App extends Component<Props, State> {
         return highlights.find(highlight => highlight.id === id);
     }
 
-    addHighlight(highlight: any) {
+    addHighlight(highlight: BdThread) {
         const {highlights} = this.state;
 
         console.log("Saving highlight", highlight);
@@ -97,6 +92,21 @@ class App extends Component<Props, State> {
             highlights: [{...highlight, id: getNextId()}, ...highlights]
         });
     }
+
+    addComment = (highLight: BdThread) => (comment: BdComment) => {
+        console.log("Adding comment");
+
+        this.setState({
+            highlights: this.state.highlights.map(h => {
+                return h.id === highLight.id
+                    ? {
+                        ...h,
+                        comments: [...h.comments, comment]
+                    }
+                    : h
+            })
+        })
+    };
 
     updateHighlight(highlightId: string, position: any, content: any) {
         console.log("Updating highlight", highlightId, position, content);
@@ -142,12 +152,19 @@ class App extends Component<Props, State> {
                                     position: any,
                                     content: any,
                                     hideTipAndSelection: any,
-                                    transformSelection :any
+                                    transformSelection: any
                                 ) => (
                                     <Tip
                                         onOpen={transformSelection}
-                                        onConfirm={(comment:any) => {
-                                            this.addHighlight({content, position, comment});
+                                        onConfirm={(comment: any) => {
+                                            this.addHighlight({
+                                                id: "",
+                                                content,
+                                                position,
+                                                comment,
+                                                comments: [],
+                                                likes: 0
+                                            });
 
                                             hideTipAndSelection();
                                         }}
@@ -205,6 +222,7 @@ class App extends Component<Props, State> {
                 <Sidebar
                     highlights={highlights}
                     resetHighlights={this.resetHighlights}
+                    addComment={this.addComment}
                 />
             </div>
         );
