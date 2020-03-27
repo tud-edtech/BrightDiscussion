@@ -34,7 +34,7 @@ const MyPdfLoader: React.FC<Props> = ({children, beforeLoad, useBuffer, buffer, 
                         })
                 });
         }
-    }, [buffer, url]);
+    }, [useBuffer, buffer, url]);
 
     if (pdfDocument) {
         return children(pdfDocument);
