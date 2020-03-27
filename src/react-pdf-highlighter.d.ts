@@ -2,7 +2,7 @@ declare module 'react-pdf-highlighter' {
     interface PdfLoaderProps {
         url: string,
         beforeLoad: React.Element<any>,
-        children: (pdfDocument: T_PDFJS_Document) => React$Element<any>
+        children: (pdfDocument: T_PDFJS_Document) => React.Element<any>
     }
 
     interface PdfLoaderState {
