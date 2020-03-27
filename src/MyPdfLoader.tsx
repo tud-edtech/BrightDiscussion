@@ -1,6 +1,4 @@
-import React, {Component, ReactElement} from "react";
-
-// import type { T_PDFJS, T_PDFJS_Document } from "../types";
+import React, {ReactElement, useEffect, useState} from "react";
 
 import pdfjs from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
@@ -9,64 +7,40 @@ import {T_PDFJS_Document} from "react-pdf-highlighter";
 interface Props {
     url: string
     useBuffer: boolean
-    buffer: ArrayBuffer | null,
-    beforeLoad: ReactElement<any>,
-    children: (pdfDocument: T_PDFJS_Document) => ReactElement<any>
+    buffer: ArrayBuffer | null
+    beforeLoad: ReactElement
+    children: (pdfDocument: T_PDFJS_Document) => ReactElement
 }
 
-interface State {
-    pdfDocument: T_PDFJS_Document | null
-}
+const MyPdfLoader: React.FC<Props> = ({children, beforeLoad, useBuffer, buffer, url}) => {
+    const [pdfDocument, setPdfDocument] = useState<T_PDFJS_Document>();
 
-class MyPdfLoader extends Component<Props, State> {
-    state: State = {
-        pdfDocument: null
-    };
-
-    componentDidMount() {
-        this.loadPdf();
-    }
-
-    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
-        if (prevProps.url !== this.props.url || prevProps.buffer !== this.props.buffer) this.loadPdf()
-    }
-
-    loadPdf() {
-        const {useBuffer, url, buffer} = this.props;
-
+    useEffect(() => {
         if (useBuffer) {
             if (buffer) {
-                console.log("Got buffer man");
-                pdfjs.getDocument({data: buffer, isEvalSupported: false}).promise.then((pdf: T_PDFJS_Document) => {
-                    this.setState({
-                        pdfDocument: pdf
+                pdfjs.getDocument({data: buffer, isEvalSupported: false}).promise
+                    .then((pdf: T_PDFJS_Document) => {
+                        setPdfDocument(pdf);
                     });
-                });
             }
         } else {
             fetch(url)
                 .then(response => response.blob())
                 .then(blob => blob.arrayBuffer())
                 .then(buffer => {
-                    pdfjs.getDocument({data: buffer, isEvalSupported: false}).promise.then((pdf: T_PDFJS_Document) => {
-                        this.setState({
-                            pdfDocument: pdf
-                        });
-                    })
+                    pdfjs.getDocument({data: buffer, isEvalSupported: false}).promise
+                        .then((pdf: T_PDFJS_Document) => {
+                            setPdfDocument(pdf);
+                        })
                 });
         }
+    }, [buffer, url]);
+
+    if (pdfDocument) {
+        return children(pdfDocument);
     }
 
-    render() {
-        const {children, beforeLoad} = this.props;
-        const {pdfDocument} = this.state;
-
-        if (pdfDocument) {
-            return children(pdfDocument);
-        }
-
-        return beforeLoad;
-    }
-}
+    return beforeLoad;
+};
 
 export default MyPdfLoader;

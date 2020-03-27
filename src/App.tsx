@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import URLSearchParams from "url-search-params";
 
 import {
-    PdfLoader,
     PdfHighlighter,
     Tip,
     Highlight,
@@ -52,7 +51,7 @@ const url = searchParams.get("url") || DEFAULT_URL;
 const useBuffer = !!searchParams.get('buffer');
 
 class App extends Component<Props, State> {
-    state:State = {
+    state: State = {
         highlights: useBuffer ? [] : testHighlights[url] ? [...testHighlights[url]] : [],
         buffer: null
     };
@@ -88,7 +87,6 @@ class App extends Component<Props, State> {
     }
 
     receivePdf = (ev: MessageEvent) => {
-        console.log("received message", ev.data, useBuffer);
         this.setState({buffer: ev.data});
     };
 
@@ -144,14 +142,7 @@ class App extends Component<Props, State> {
 
         return (
             <div className="App" style={{display: "flex", height: "100vh"}}>
-                <div
-                    style={{
-                        height: "100vh",
-                        width: "75vw",
-                        overflowY: "scroll",
-                        position: "relative"
-                    }}
-                >
+                <div style={{height: "100vh", width: "75vw", position: "relative"}}>
                     <MyPdfLoader url={url} useBuffer={useBuffer} buffer={buffer} beforeLoad={<Spinner/>}>
                         {(pdfDocument: any) => (
                             <PdfHighlighter
