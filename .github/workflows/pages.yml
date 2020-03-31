@@ -28,6 +28,8 @@ jobs:
       run: |
         yarn
         yarn build
+      env:
+        PUBLIC_URL: https://tud-edtech.github.io/BrightDiscussion/
 
     # Runs a set of commands using the runners shell
     - name: Deploy 🚀
