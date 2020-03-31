@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Brighstpace Kittenator",
+  "name": "BrightDiscussion",
   "version": "0.0.1",
-  "description": "Google chrome extension that adds a picture of a kitten after every page in a pdf document on bs.",
+  "description": "Google chrome extension for BrightDiscussion",
   "sandbox": {
     "pages": ["index.html"]
   },
