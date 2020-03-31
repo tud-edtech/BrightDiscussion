@@ -1,5 +1,7 @@
 # BrightDiscussion
 
+See https://tud-edtech.github.io/BrightDiscussion/
+
 ## Available Scripts
 
 In the project directory, you can run:
