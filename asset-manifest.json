@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.fd6e523d.chunk.css",
-    "main.js": "/static/js/main.b087807f.chunk.js",
-    "runtime-main.js": "/static/js/runtime-main.9bb91264.js",
-    "static/css/2.8d31849f.chunk.css": "/static/css/2.8d31849f.chunk.css",
-    "static/js/2.ea8c4115.chunk.js": "/static/js/2.ea8c4115.chunk.js",
-    "static/js/2.ea8c4115.chunk.js.map": "/static/js/2.ea8c4115.chunk.js.map",
-    "index.html": "/index.html",
-    "static/js/2.ea8c4115.chunk.js.LICENSE.txt": "/static/js/2.ea8c4115.chunk.js.LICENSE.txt"
+    "main.css": "https://tud-edtech.github.io/BrightDiscussion/static/css/main.fd6e523d.chunk.css",
+    "main.js": "https://tud-edtech.github.io/BrightDiscussion/static/js/main.b087807f.chunk.js",
+    "runtime-main.js": "https://tud-edtech.github.io/BrightDiscussion/static/js/runtime-main.fb4ac503.js",
+    "static/css/2.8d31849f.chunk.css": "https://tud-edtech.github.io/BrightDiscussion/static/css/2.8d31849f.chunk.css",
+    "static/js/2.ea8c4115.chunk.js": "https://tud-edtech.github.io/BrightDiscussion/static/js/2.ea8c4115.chunk.js",
+    "static/js/2.ea8c4115.chunk.js.map": "https://tud-edtech.github.io/BrightDiscussion/static/js/2.ea8c4115.chunk.js.map",
+    "index.html": "https://tud-edtech.github.io/BrightDiscussion/index.html",
+    "static/js/2.ea8c4115.chunk.js.LICENSE.txt": "https://tud-edtech.github.io/BrightDiscussion/static/js/2.ea8c4115.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9bb91264.js",
+    "static/js/runtime-main.fb4ac503.js",
     "static/css/2.8d31849f.chunk.css",
     "static/js/2.ea8c4115.chunk.js",
     "static/css/main.fd6e523d.chunk.css",
