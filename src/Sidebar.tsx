@@ -11,6 +11,14 @@ interface Props {
     addComment: (thread: BdThread) => (comment: BdComment) => void;
 }
 
+const sortFunction = (t1: BdThread, t2: BdThread) => {
+    if (t1.position.pageNumber != t2.position.pageNumber) {
+        return t1.position.pageNumber - t2.position.pageNumber;
+    }
+
+    return t1.position.boundingRect.y1 - t2.position.boundingRect.y1;
+};
+
 function Sidebar({highlights, resetHighlights, addComment}: Props) {
     return (
         <div className="sidebar" style={{width: "25vw"}}>
@@ -26,7 +34,7 @@ function Sidebar({highlights, resetHighlights, addComment}: Props) {
             </div>
 
             <ul className="sidebar__highlights">
-                {highlights.map((highlight, index) => (
+                {highlights.sort(sortFunction).map((highlight, index) => (
                     <Thread key={index} thread={highlight} addComment={addComment(highlight)}/>
                 ))}
             </ul>
