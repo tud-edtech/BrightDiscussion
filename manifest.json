@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "BrightDiscussion",
+  "version": "0.0.1",
+  "description": "Google chrome extension for BrightDiscussion",
+  "sandbox": {
+    "pages": ["index.html"]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "matches": [
+        "https://brightspace.tudelft.nl/d2l/le/content/*/viewContent/*/View"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*"
+  ]
+}
+
